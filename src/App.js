@@ -91,7 +91,7 @@ const CSS = `
 `
 
 // ─── API ──────────────────────────────────────────────────────────────────────
-const API_BASE = "http://localhost:5000/api"
+const API_BASE = "https://mytutors24-backend.onrender.com/api"
 const api = {
   get:  async (p,t)   => { const r=await fetch(`${API_BASE}${p}`,{headers:t?{Authorization:`Bearer ${t}`}:{}}); if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error||`${r.status}`)} return r.json() },
   post: async (p,b,t) => { const r=await fetch(`${API_BASE}${p}`,{method:"POST",headers:{"Content-Type":"application/json",...(t?{Authorization:`Bearer ${t}`}:{})},body:JSON.stringify(b)}); if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error||`${r.status}`)} return r.json() },
@@ -100,7 +100,7 @@ const api = {
 }
 
 // ─── SOCKET.IO CLIENT ─────────────────────────────────────────────────────────
-const SOCKET_URL = "http://localhost:5000"
+const SOCKET_URL = "https://mytutors24-backend.onrender.com"
 let _socket = null
 function loadSocketIO() {
   return new Promise((res, rej) => {
@@ -1057,7 +1057,7 @@ function TutorApp({user,onLogout}) {
     const poll = setInterval(()=>{
       api.post("/auth/tutor/login",{email:user.email,password:""}).catch(()=>{})
       // Better: fetch own profile
-      fetch(`http://localhost:5000/api/tutors/${user.id}`).then(r=>r.json()).then(d=>{
+      fetch(`https://mytutors24-backend.onrender.com/api/tutors/${user.id}`).then(r=>r.json()).then(d=>{
         if(d.approval_status==="approved"||d.id) { setStatus("approved"); setToast("🎉 Your account has been approved! You are now visible to students.") }
       }).catch(()=>{})
     }, 10000)
