@@ -709,6 +709,10 @@ function StudentApp({user,onLogout}) {
   // Fetch approved tutors from real backend
   useEffect(()=>{
     api.get("/tutors").then(setTutors).catch(()=>setTutors([]))
+    const interval = setInterval(()=>{
+      api.get("/tutors").then(setTutors).catch(()=>{})
+    }, 30000)
+    return ()=>clearInterval(interval)
   },[])
 
   const msgContacts = tutors.slice(0,8)
