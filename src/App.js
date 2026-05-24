@@ -74,8 +74,8 @@ const CSS = `
   .chat-hdr{padding:12px 20px;border-bottom:1px solid ${C.hairline};display:flex;align-items:center;gap:12px;background:${C.surface};flex-shrink:0}
   .chat-msgs{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:8px;background:${C.bg}}
   .chat-inp{padding:12px 16px;border-top:1px solid ${C.hairline};display:flex;gap:10px;background:${C.surface};flex-shrink:0;align-items:center}
-  .bubble-me{background:${C.accent};color:#fff;border-radius:18px 18px 4px 18px;padding:10px 14px;font-size:14px;line-height:1.5;word-break:break-word;max-width:60%}
-  .bubble-them{background:${C.surface};border:1px solid ${C.hairline};color:${C.ink};border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:14px;line-height:1.5;word-break:break-word;max-width:60%}
+  .bubble-me{background:${C.accent};color:#fff;border-radius:18px 18px 4px 18px;padding:10px 14px;font-size:14px;line-height:1.5;word-break:break-word;max-width:65%;display:inline-block}
+  .bubble-them{background:${C.surface};border:1px solid ${C.hairline};color:${C.ink};border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:14px;line-height:1.5;word-break:break-word;max-width:65%;display:inline-block}
   .typing-dots{display:inline-flex;gap:4px;align-items:center}
   .dot{width:7px;height:7px;border-radius:50%;background:${C.muted};animation:bounce .9s infinite}
   .dot:nth-child(2){animation-delay:.15s} .dot:nth-child(3){animation-delay:.3s}
