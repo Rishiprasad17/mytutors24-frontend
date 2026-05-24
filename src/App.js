@@ -1053,7 +1053,7 @@ function TutorApp({user,onLogout}) {
   const [page,    setPage]    = useState("dashboard")
   const [bookings,setBk]      = useState([])
   const [toast,   setToast]   = useState(null)
-  const [status,  setStatus]  = useState(user.approval_status==="approved"?"approved":user.approval_status||"pending")
+  const [status, setStatus] = useState("loading")
 
   // Poll for approval status while pending
   useEffect(()=>{
