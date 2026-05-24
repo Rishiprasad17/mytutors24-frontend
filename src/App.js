@@ -1288,12 +1288,12 @@ export default function App() {
   const loginTut = withLoad(async f => {
     if(!f.email||!f.password){setErr("Please fill in all fields.");return}
     const d = await api.post("/auth/tutor/login",{email:f.email,password:f.password})
-    saveTutor(d); go("tutor-app")
+    saveTutor({...d, approval_status: d.approval_status || 'approved'}); go('tutor-app')
   })
   const regTut = withLoad(async f => {
     if(!f.name||!f.email||!f.subject){setErr("Please fill in all fields.");return}
     const d = await api.post("/auth/tutor/register",f)
-    saveTutor(d); go("tutor-app")
+    saveTutor({...d, approval_status: d.approval_status || 'approved'}); go('tutor-app')
   })
 
   if(route==="landing")          return <Landing go={go}/>
