@@ -115,7 +115,7 @@ function loadSocketIO() {
 async function getSocket() {
   if (_socket && _socket.connected) return _socket
   const io = await loadSocketIO()
-  _socket = io(SOCKET_URL, { transports: ["websocket","polling"] })
+  _socket = io(SOCKET_URL, { transports: ["polling"] })
   return _socket
 }
 
