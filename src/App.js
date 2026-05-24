@@ -1059,7 +1059,7 @@ function TutorApp({user,onLogout}) {
   useEffect(()=>{
     if(status==="approved") return
     const poll = setInterval(()=>{
-      api.post("/auth/tutor/login",{email:user.email,password:""}).catch(()=>{})
+      Promise.resolve()
       // Better: fetch own profile
       fetch(`https://mytutors24-backend.onrender.com/api/tutors/${user.id}`).then(r=>r.json()).then(d=>{
         if(d.approval_status==="approved"||d.id) { setStatus("approved"); setToast("🎉 Your account has been approved! You are now visible to students.") }
