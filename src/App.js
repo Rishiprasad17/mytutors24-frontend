@@ -94,7 +94,7 @@ const CSS = `
 `
 
 // ─── API ─────────────────────────────────────────────────────────────────────
-const API_BASE = "http://localhost:5000/api"
+const API_BASE = "https://mytutors24-backend.onrender.com/api"
 const api = {
   get:    async (p,t)    => { const r=await fetch(`${API_BASE}${p}`,{headers:t?{Authorization:`Bearer ${t}`}:{}}); if(!r.ok)throw new Error(r.status); return r.json() },
   post:   async (p,b,t)  => { const r=await fetch(`${API_BASE}${p}`,{method:"POST",headers:{"Content-Type":"application/json",...(t?{Authorization:`Bearer ${t}`}:{})},body:JSON.stringify(b)}); if(!r.ok)throw new Error(r.status); return r.json() },
@@ -1405,13 +1405,19 @@ export default function App() {
   if(route==="landing")          return <Landing go={go}/>
   if(route==="login-selector")   return <LoginSelector go={go}/>
   if(route==="student-login")    return <AuthForm title="Student login"        sub="Welcome back! Log in to continue."            fields={[{key:"email",label:"Email",type:"email",ph:"you@email.com"},{key:"password",label:"Password",type:"password",ph:"••••••••"}]}                                                                             onSubmit={loginStu} loading={loading} error={err} footer={{text:"New here?",label:"Create account",fn:()=>go("student-register")}} onBack={()=>go("login-selector")} btnLabel="Log in"/>
-  if(route==="student-register") return <AuthForm title="Create your account"  sub="Join 50,000+ students already learning."      fields={[{key:"name",label:"Full name",ph:"Rohan Malhotra"},{key:"email",label:"Email",type:"email",ph:"you@email.com"},{key:"password",label:"Password",type:"password",ph:"Min 8 characters"},{key:"city",label:"City",ph:"Delhi"}]}  onSubmit={regStu}   loading={loading} error={err} footer={{text:"Already registered?",label:"Log in",fn:()=>go("student-login")}}    onBack={()=>go("login-selector")} btnLabel="Create account"/>
+  if(route==="student-register") return <AuthForm title="Create your account"  sub="Join 50,000+ students already learning."      fields={[{key:"name",label:"Full name",ph:"Rohan Malhotra"},{key:"email",label:"Email",type:"email",ph:"you@email.com"},{key:"password",label:"Password",type:"password",ph:"Min 8 characters"},{key:"city",label:"City",ph:"Delhi"},{key:"phone",label:"WhatsApp number",ph:"9876543210"}]}  onSubmit={regStu}   loading={loading} error={err} footer={{text:"Already registered?",label:"Log in",fn:()=>go("student-login")}}    onBack={()=>go("login-selector")} btnLabel="Create account"/>
   if(route==="tutor-login")      return <AuthForm title="Tutor login"          sub="Manage your classes and earn more."           fields={[{key:"email",label:"Email",type:"email",ph:"you@email.com"},{key:"password",label:"Password",type:"password",ph:"••••••••"}]}                                                                             onSubmit={loginTut} loading={loading} error={err} footer={{text:"Not registered?",label:"Join as a tutor",fn:()=>go("tutor-register")}}  onBack={()=>go("login-selector")} btnLabel="Log in"/>
   if(route==="tutor-register")   return <AuthForm title="Join as a tutor"      sub="Start teaching and earning on MyTutors24."    fields={[{key:"name",label:"Full name",ph:"Dr. Arjun Sharma"},{key:"email",label:"Email",type:"email",ph:"you@email.com"},{key:"password",label:"Password",type:"password",ph:"Min 8 characters"},{key:"subject",label:"Subject",type:"select",opts:SUBJ_LIST},{key:"city",label:"City",ph:"Delhi"},{key:"phone",label:"WhatsApp number",ph:"9876543210"}]} onSubmit={regTut}   loading={loading} error={err} footer={{text:"Already registered?",label:"Log in",fn:()=>go("tutor-login")}}   onBack={()=>go("login-selector")} btnLabel="Create account"/>
   if(route==="student-app"&&student) return <StudentApp user={student} onLogout={()=>{setStudent(null);go("landing")}}/>
   if(route==="tutor-app"&&tutor)     return <TutorApp   user={tutor}   onLogout={()=>{setTutor(null);  go("landing")}}/>
   return <Landing go={go}/>
 }
+
+
+
+
+
+
 
 
 
