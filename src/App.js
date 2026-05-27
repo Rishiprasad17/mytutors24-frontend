@@ -718,6 +718,7 @@ function LoginSelector({go}) {
 
 function AuthForm({title,sub,fields,onSubmit,loading,error,footer,onBack,btnLabel="Log in"}) {
   const [form,setForm] = useState({})
+  const [showTnc,setShowTnc] = useState(false)
   const set = (k,v) => setForm(p=>({...p,[k]:v}))
   return (
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:C.bg}}>
@@ -739,12 +740,13 @@ function AuthForm({title,sub,fields,onSubmit,loading,error,footer,onBack,btnLabe
               }
             </div>
           ))}
-          {btnLabel!=="Log in"&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,fontSize:12,color:C.muted}}><input type="checkbox" onChange={e=>setForm(p=>({...p,tnc:e.target.checked}))}/><span>I agree to the <a href="https://github.com/Rishiprasad17/mytutors24-frontend/blob/main/src/terms_and_conditions.md" target="_blank" style={{color:"#0D4A2F",fontWeight:600}}>Terms and Conditions</a> and <a href="https://github.com/Rishiprasad17/mytutors24-frontend/blob/main/src/terms_and_conditions.md" target="_blank" style={{color:"#0D4A2F",fontWeight:600}}>Code of Conduct</a> of MyTutors24</span></div>}{error&&<div style={{background:C.dangerLight,color:C.danger,padding:"10px 14px",borderRadius:8,fontSize:13,marginBottom:16}}>{error}</div>}
+          {btnLabel!=="Log in"&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,fontSize:12,color:C.muted}}><input type="checkbox" onChange={e=>setForm(p=>({...p,tnc:e.target.checked}))}/><span>I agree to the <button onClick={e=>{e.preventDefault();setShowTnc(true)}} style={{color:"#0D4A2F",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:0,fontSize:"inherit"}}>Terms and Conditions</button> and <button onClick={e=>{e.preventDefault();setShowTnc(true)}} style={{color:"#0D4A2F",fontWeight:600,background:"none",border:"none",cursor:"pointer",padding:0,fontSize:"inherit"}}>Code of Conduct</button> of MyTutors24</span></div>}{error&&<div style={{background:C.dangerLight,color:C.danger,padding:"10px 14px",borderRadius:8,fontSize:13,marginBottom:16}}>{error}</div>}
           <button className="bp" onClick={()=>{if(btnLabel!=="Log in"&&!form.tnc){alert("Please agree to the Terms and Conditions to continue.");return;}onSubmit(form)}} style={{width:"100%",justifyContent:"center",padding:"12px 20px",marginTop:4}}>
             {loading?<Spin/>:btnLabel}
           </button>
         </div>
-        {footer&&<p style={{textAlign:"center",fontSize:13,color:C.muted,marginTop:14}}>
+          {showTnc&&<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,.7)',zIndex:300,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setShowTnc(false)}><div style={{background:'#fff',borderRadius:16,padding:28,width:640,maxWidth:'calc(100vw - 32px)',maxHeight:'80vh',overflowY:'auto'}} onClick={e=>e.stopPropagation()}><div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}><h2 style={{fontSize:18,fontWeight:700}}>Terms and Conditions</h2><button onClick={()=>setShowTnc(false)} style={{background:'none',border:'1px solid #ddd',borderRadius:8,padding:'5px 10px',cursor:'pointer'}}>Close</button></div><div style={{fontSize:13,lineHeight:1.8,color:'#555'}}><h3 style={{color:'#111',marginBottom:8}}>1. Platform Usage</h3><p style={{marginBottom:12}}>By registering on MyTutors24 you agree to use the platform only for legitimate educational purposes and treat all users with respect.</p><h3 style={{color:'#111',marginBottom:8}}>2. Non-Circumvention (Tutors)</h3><p style={{marginBottom:12}}>Tutors agree NOT to contact or accept payment from students outside MyTutors24 for 12 months. Violation entitles MyTutors24 to claim damages equal to 3x the value of off-platform sessions.</p><h3 style={{color:'#111',marginBottom:8}}>3. Actions Affecting Company</h3><p style={{marginBottom:12}}>Users must not make false statements about MyTutors24, post fake reviews, or take any action designed to damage MyTutors24 reputation or financials. Violations may result in legal action.</p><h3 style={{color:'#111',marginBottom:8}}>4. Cancellation and Refunds</h3><p style={{marginBottom:12}}>More than 24 hours before session: full refund. 2-24 hours before: 50 percent refund. Less than 2 hours: no refund. Tutor cancellations: full refund to student.</p><h3 style={{color:'#111',marginBottom:8}}>5. Professional Conduct</h3><p style={{marginBottom:12}}>All users must maintain professional conduct. Harassment, sharing student data, or academic dishonesty will result in immediate permanent ban.</p><h3 style={{color:'#111',marginBottom:8}}>6. Payments</h3><p style={{marginBottom:12}}>All payments must go through MyTutors24. Platform fee is 15 percent. Tutors receive 85 percent. Refunds processed within 5-7 business days.</p><h3 style={{color:'#111',marginBottom:8}}>7. Jurisdiction</h3><p style={{marginBottom:20}}>These terms are governed by Indian law. Disputes are subject to courts in Hyderabad, Telangana.</p></div><button onClick={()=>setShowTnc(false)} style={{width:'100%',background:'#0D4A2F',color:'#fff',border:'none',borderRadius:8,padding:'12px 20px',fontSize:14,fontWeight:600,cursor:'pointer',marginTop:8}}>I Agree and Close</button></div></div>}
+      {footer&&<p style={{textAlign:"center",fontSize:13,color:C.muted,marginTop:14}}>
           {footer.text}{" "}<button onClick={footer.fn} style={{color:C.accent,fontWeight:600,background:"none",border:"none",cursor:"pointer"}}>{footer.label}</button>
         </p>}
       </div>
@@ -1412,6 +1414,8 @@ export default function App() {
   if(route==="tutor-app"&&tutor)     return <TutorApp   user={tutor}   onLogout={()=>{setTutor(null);  go("landing")}}/>
   return <Landing go={go}/>
 }
+
+
 
 
 
