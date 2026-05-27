@@ -739,7 +739,7 @@ function AuthForm({title,sub,fields,onSubmit,loading,error,footer,onBack,btnLabe
               }
             </div>
           ))}
-          {btnLabel!=="Log in"&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,fontSize:12,color:C.muted}}><input type="checkbox" onChange={e=>setForm(p=>({...p,tnc:e.target.checked}))}/><span>I agree to the <b>Terms and Conditions</b> and <b>Code of Conduct</b> of MyTutors24</span></div>}{error&&<div style={{background:C.dangerLight,color:C.danger,padding:"10px 14px",borderRadius:8,fontSize:13,marginBottom:16}}>{error}</div>}
+          {btnLabel!=="Log in"&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,fontSize:12,color:C.muted}}><input type="checkbox" onChange={e=>setForm(p=>({...p,tnc:e.target.checked}))}/><span>I agree to the <a href="https://github.com/Rishiprasad17/mytutors24-frontend/blob/main/src/terms_and_conditions.md" target="_blank" style={{color:"#0D4A2F",fontWeight:600}}>Terms and Conditions</a> and <a href="https://github.com/Rishiprasad17/mytutors24-frontend/blob/main/src/terms_and_conditions.md" target="_blank" style={{color:"#0D4A2F",fontWeight:600}}>Code of Conduct</a> of MyTutors24</span></div>}{error&&<div style={{background:C.dangerLight,color:C.danger,padding:"10px 14px",borderRadius:8,fontSize:13,marginBottom:16}}>{error}</div>}
           <button className="bp" onClick={()=>{if(btnLabel!=="Log in"&&!form.tnc){alert("Please agree to the Terms and Conditions to continue.");return;}onSubmit(form)}} style={{width:"100%",justifyContent:"center",padding:"12px 20px",marginTop:4}}>
             {loading?<Spin/>:btnLabel}
           </button>
@@ -1412,6 +1412,8 @@ export default function App() {
   if(route==="tutor-app"&&tutor)     return <TutorApp   user={tutor}   onLogout={()=>{setTutor(null);  go("landing")}}/>
   return <Landing go={go}/>
 }
+
+
 
 
 
