@@ -75,8 +75,8 @@ const CSS = `
   .chat-header{padding:12px 20px;border-bottom:1px solid ${C.hairline};display:flex;align-items:center;gap:12px;background:${C.surface};flex-shrink:0}
   .chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;background:${C.bg}}
   .chat-input{padding:12px 16px;border-top:1px solid ${C.hairline};display:flex;gap:10px;background:${C.surface};flex-shrink:0;align-items:center}
-  .bubble-me{background:${C.accent};color:#fff;border-radius:18px 18px 4px 18px;padding:10px 14px;max-width:65%;min-width:0;font-size:14px;line-height:1.55;word-break:normal;white-space:normal;display:inline-block}
-  .bubble-them{background:${C.surface};border:1px solid ${C.hairline};color:${C.ink};border-radius:18px 18px 18px 4px;padding:10px 14px;max-width:65%;min-width:0;font-size:14px;line-height:1.55;word-break:normal;white-space:normal;display:inline-block}
+  .bubble-me{background:${C.accent};color:#fff;border-radius:18px 18px 4px 18px;padding:10px 14px;max-width:65%;min-width:44px;font-size:14px;line-height:1.55;word-break:break-word;display:inline-block}
+  .bubble-them{background:${C.surface};border:1px solid ${C.hairline};color:${C.ink};border-radius:18px 18px 18px 4px;padding:10px 14px;max-width:65%;min-width:44px;font-size:14px;line-height:1.55;word-break:break-word;display:inline-block}
   .typing{display:flex;gap:4px;align-items:center;padding:10px 14px}
   .dot{width:7px;height:7px;border-radius:50%;background:${C.muted};animation:bounce .9s infinite}
   .dot:nth-child(2){animation-delay:.15s} .dot:nth-child(3){animation-delay:.3s}
@@ -1414,6 +1414,9 @@ export default function App() {
   if(route==="tutor-app"&&tutor)     return <TutorApp   user={tutor}   onLogout={()=>{setTutor(null);  go("landing")}}/>
   return <Landing go={go}/>
 }
+
+
+
 
 
 
